@@ -3,6 +3,7 @@
 import shell from 'shelljs';
 import path from 'path';
 import config from './config';
+import redocOptions from './redocOptions';
 import Log from './log';
 
 const log = new Log();
@@ -13,9 +14,11 @@ const setupUI = () => {
     shell.mkdir('-p', uiPath);
     var indexPath = path.join(uiPath, 'index.html');
     log.log(`Generating OpenAPI docs index at '${indexPath}'`);
+    var redocOpts = redocOptions.getRedocCliOptions();
     shell.exec(
-        `redoc-cli bundle --output ${indexPath} ${OPENAPI_YAML_PATH}`
+        `redoc-cli bundle ${redocOpts} --output ${indexPath} ${OPENAPI_YAML_PATH}`
     );
+    //--options.theme.colors.primary.main=${defaults.redoc.options.theme.colors.primary.main}
     log.preview({
         'title': 'OpenAPI docs folder contents',
         'text': shell.ls(uiPath).stdout

@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
   x-logo:
-    url: 'https://www.openapis.org/wp-content/uploads/sites/3/2018/02/OpenAPI_Logo_Pantone-1.png'
+    url: 'https://raw.githubusercontent.com/jb-adams/assets/master/img/ga4gh-logo-padding.png'
   description: >
     This is an **example** API to demonstrate features of OpenAPI specification
 
@@ -55,35 +55,18 @@ externalDocs:
   description: Find out how to create Github repo for your OpenAPI spec.
   url: 'https://github.com/Rebilly/generator-openapi-repo'
 tags:
+  - '$ref': 'frontmatter/preamble.yaml'
+  - '$ref': 'frontmatter/biology.yaml'
+  - '$ref': 'appendix/example_chapter.yaml'
   - name: Echo
     description: Example echo operations
   - name: User
     description: Operations about user
-  - name: Example Chapter
-    description: |
-      # Overview
-
-      Here is an example of additional context that can be added with markdown.
-
-      ## Basic syntax
-
-      You can use standard markdown tables and formatting
-
-      | Tables   |      Are      |  Cool |
-      |----------|:-------------:|------:|
-      | col 1 is |  left-aligned | $1600 |
-      | col 2 is |    centered   |   $12 |
-      | col 3 is | right-aligned |    $1 |
-
-      ## Images
-
-      <img style='float: right;' width='250' src='../../../test/test-shared/OpenAPI_Logo_Pantone-1.png'/>
-      This is a block of text arranged next to an image (hosted in this repo).
-
-servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
 x-tagGroups:
+  - name: Front Matter
+    tags:
+      - Preamble
+      - Biology
   - name: Operations
     tags:
       - Echo
@@ -91,8 +74,34 @@ x-tagGroups:
   - name: Appendix
     tags:
       - Example Chapter
+servers:
+  - url: 'http://example.com/api/v1'
+  - url: 'https://example.com/api/v1'
 paths:
   /echo:
+    get:
+      tags:
+        - Echo
+      summary: Get Echo test
+      description: Get back the exact message you sent
+      operationId: getEcho
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Hello World
+        '302':
+          description: redirect
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: An Error Occurred
     post:
       tags:
         - Echo
@@ -138,6 +147,48 @@ paths:
               example: Hello world!
         description: Echo payload
         required: true
+    put:
+      tags:
+        - Echo
+      summary: Put Echo test
+      description: Get back the exact message you sent
+      operationId: putEcho
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Hello World
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: An Error Occurred
+    delete:
+      tags:
+        - Echo
+      summary: Delete Echo test
+      description: Delete the message you sent
+      operationId: deleteEcho
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Hello World
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: An Error Occurred
 components:
   headers:
     ExpiresAfter:

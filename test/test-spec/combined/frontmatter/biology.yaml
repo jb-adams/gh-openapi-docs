@@ -1,0 +1,4 @@
+name: Biology
+description: >
+  An example of a front matter tag located in another file. This can be used
+  to write additional sections in other docs using Markdown

@@ -22,15 +22,15 @@
     "update-notifier": "3.0.1",
     "yargs-parser": "15.0.0"
   },
-  "bin": "./dist/bundle.js",
+  "bin": {
+    "gh-openapi-docs": "./dist/bundle.js"
+  },
   "main": "./src/lib/index.js",
   "scripts": {
     "fetch": "node src/fetchpages.js",
     "build:swagger": "node src/swagger-ui.js",
     "build:redoc": "node src/redoc-ui.js",
-    "clean": "rm -rf dist/* bin/*",
-    "build": "npx webpack-cli --mode=development",
-    "cleanBuild": "npm run clean && npm run build",
+    "build": "npx webpack-cli --mode=development && chmod +x ./dist/bundle.js",
     "test": "npx mocha-webpack --webpack-config webpack.config-test.js --recursive \"src\" \"test/mocha\" --exit",
     "coverage": "npx nyc npm run test",
     "pushCoverageReport": "npx nyc report --reporter=text-lcov | npx coveralls"

@@ -1,0 +1,20 @@
+name: Example Chapter
+description: |
+  # Chapter Overview
+
+  Here is an example of additional context that can be added with markdown.
+
+  ## Basic syntax
+
+  You can use standard markdown tables and formatting
+
+  | Tables   |      Are      |  Cool |
+  |----------|:-------------:|------:|
+  | col 1 is |  left-aligned | $1600 |
+  | col 2 is |    centered   |   $12 |
+  | col 3 is | right-aligned |    $1 |
+
+  ## Images
+
+  <img style='float: right;' width='250' src='../../../test/test-shared/OpenAPI_Logo_Pantone-1.png'/>
+  This is a block of text arranged next to an image (hosted in this repo).
