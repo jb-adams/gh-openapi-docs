@@ -16,6 +16,8 @@
     "test": "npx mocha-webpack --webpack-config webpack.config-test.js --recursive \"src\" \"test/mocha\" --exit",
     "coverage": "npx nyc npm run test",
     "pushCoverageReport": "npx nyc report --reporter=text-lcov | npx coveralls",
+    "dockerBuild": "npm run build && docker image build -t ga4gh/gh-openapi-docs:$npm_package_version .",
+    "dockerPublish": "npm run dockerBuild && docker image push ga4gh/gh-openapi-docs:$npm_package_version",
     "lint:all": "echo 1"
   },
   "bin": "./dist/bundle.js",

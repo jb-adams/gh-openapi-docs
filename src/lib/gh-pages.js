@@ -4,6 +4,7 @@ import config from './config';
 import Log from './log';
 import fs from 'fs';
 import subprocess from './subprocess';
+import GitConfig from './git-config';
 
 const log = new Log();
 
@@ -51,9 +52,14 @@ class LocalGithubPagesBranch {
         this.copyDocFiles(this.tempDir, config.wd, false);
     }
 
+    generateCommitMessage() {
+        var timestamp = new Date().toISOString();
+        return `${timestamp}; branch: ${config.branch}; gh-openapi-docs autopush`;
+    }
+
     addCommitPush() {
         subprocess.exec(`git add .`);
-        subprocess.exec(`git commit -m "testing automated commit and push"`);
+        subprocess.exec(`git commit -m "${this.generateCommitMessage()}"`);
         subprocess.exec(`git push`);
     }
 }
@@ -69,6 +75,7 @@ const pushToPages = () => {
     var localGhPagesBranch = new LocalGithubPagesBranch();
     localGhPagesBranch.createEnterTempDir();
     localGhPagesBranch.copyDocsFromWorkingDirToTmpDir();
+    GitConfig.configure();
     localGhPagesBranch.addCommitPush();
     localGhPagesBranch.leaveRemoveTempDir();
 }

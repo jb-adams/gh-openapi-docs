@@ -9,11 +9,17 @@ repoInfo.branch = repoInfo.branch || process.env.TRAVIS_BRANCH || "undefined";
 
 const env = process.env.NODE_ENV;
 const wd = shell.pwd().toString();
+const ghPagesUserName = process.env.GH_PAGES_NAME;
+const ghPagesUserEmail = process.env.GH_PAGES_EMAIL;
+const ghPagesUserToken = process.env.GH_PAGES_TOKEN;
 const repoOrigin = origin.sync();
 const environment = merge(repoInfo, {
     env,
-    repoOrigin,
     wd,
+    ghPagesUserName,
+    ghPagesUserEmail,
+    ghPagesUserToken,
+    repoOrigin,
 });
 
 export default environment;
