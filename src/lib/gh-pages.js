@@ -30,4 +30,27 @@ const fetchPages = () => {
     subprocess.removeDirs('.ghpages-tmp');
 };
 
-export { fetchPages };
+const pushToPages = () => {
+    
+    if (fs.existsSync(config.branchPathBase)) {
+        subprocess(exec, `git add ${config.branchPathBase}`).runAndAssert();
+    }
+    if (fs.existsSync(config.docsRoot)) {
+        subprocess(exec, `git add ${config.docsRoot}`).runAndAssert();
+    }
+    if (fs.existsSync("./openapi.json")) {
+        subprocess(exec, `git add ./openapi.json`).runAndAssert();
+    }
+    if (fs.existsSync("./openapi.yaml")) {
+        subprocess(exec, `git add ./openapi.yaml`).runAndAssert();
+    }
+
+    subprocess(exec, `git stash save`).runAndAssert();
+    subprocess(exec, `git checkout gh-pages`).runAndAssert();
+    subprocess(exec, `git pull`).runAndAssert();
+    subprocess(exec, `git checkout stash -- .`).runAndAssert();
+    // subprocess(exec, `git commit -m "testing automated push"`).runAndAssert();
+    // subprocess(exec, `git push`).runAndAssert();
+}
+
+export { fetchPages, pushToPages };
