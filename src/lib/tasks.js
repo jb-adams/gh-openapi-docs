@@ -1,6 +1,6 @@
 import Logger from './log';
 import Config from './config';
-import { fetchPages } from './gh-pages';
+import { fetchPages, pushToPages } from './gh-pages';
 import bundleSpec from './bundle';
 import { setupUI } from './redoc-ui';
 
@@ -18,6 +18,7 @@ const runTasks = (opts, di) => {
     fetchPages();
     bundleSpec();
     setupUI();
+    pushToPages();
 
     log.log(`Done (in ${Math.floor(process.uptime())}s.)`);
 
