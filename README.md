@@ -38,7 +38,12 @@ You should add a file named `.spec-docs.json` to the top level of your repo. The
     "apiSpecPath": "openapi/openapi.yaml",
     "docsRoot": "docs",
     "defaultBranch": "master",
-    "branchPathBase": "preview"
+    "branchPathBase": "preview",
+    "enabledBranchPatterns": [
+        "^master$",
+        "^develop$",
+        "release/.+"
+    ]
 }
 ```
 
@@ -46,6 +51,8 @@ You should add a file named `.spec-docs.json` to the top level of your repo. The
 + **`docsRoot`:** folder `dirname` and path for where rendered outputs are to be stored | default: `"docs"` (i.e., `<repoRoot>/docs/` or `<repoRoot>/preview/<branchName>/docs/` depending on the active branch)
 + **`defaultBranch`:** the default branch, typically as defined in your GitHub settings for the repo; however, the package doesn't explicitly check these settings, so consider "default" to indicate which version is hosted at `https://ga4gh.github.io/<repoName>/docs`, whereas all content for all other branches will be hosted at `https://ga4gh.github.io/<repoName>/preview/<branchName>/docs` | default: `"master"`
 + **`branchPathBase`:** name used for the folder where content for any non-default branches will be stored and hosted | default: `"preview"`
++ **`enabledBranchPatterns`:** a list of regex patterns indicating which branches to build documentation off of. Docs will be built if the current git branch matches one of the patterns. If this property is not specified, docs will only be built off
+branch `master`.
 
 ## Outputs
 

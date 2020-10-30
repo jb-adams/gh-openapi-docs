@@ -1,7 +1,7 @@
 import assert from 'assert';
 import subprocess from '@lib/subprocess';
 
-// test cases for runAndAssert function
+// test cases for subprocess function
 let subprocessTC = [
     {command: subprocess.changeDir, args: ["/dir/that/doesnt/exist"], expError: true},
     {command: subprocess.makeDirs, args: [".testtmp"], expError: false},

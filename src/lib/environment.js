@@ -12,6 +12,7 @@ const wd = shell.pwd().toString();
 const ghPagesUserName = process.env.GH_PAGES_NAME;
 const ghPagesUserEmail = process.env.GH_PAGES_EMAIL;
 const ghPagesUserToken = process.env.GH_PAGES_TOKEN;
+const prBuild = process.env.PR_BUILD || "false";
 const repoOrigin = origin.sync();
 const environment = merge(repoInfo, {
     env,
@@ -19,6 +20,7 @@ const environment = merge(repoInfo, {
     ghPagesUserName,
     ghPagesUserEmail,
     ghPagesUserToken,
+    prBuild,
     repoOrigin,
 });
 

@@ -3,8 +3,17 @@ import Config from './config';
 import { fetchPages, pushToPages } from './gh-pages';
 import bundleSpec from './bundle';
 import { setupUI } from './redoc-ui';
+import decide from './run-decider';
 
 const runTasks = (opts, di) => {
+
+  const tasks = () => {
+    fetchPages();
+    bundleSpec();
+    setupUI();
+    pushToPages();
+  }
+
   let container = {};
 
   try {
@@ -15,11 +24,7 @@ const runTasks = (opts, di) => {
     const { log } = container;
 
     log.info(`Preparing docs for API spec at '${container.config.apiSpecPath}' (${container.config.branch})`);
-    fetchPages();
-    bundleSpec();
-    setupUI();
-    pushToPages();
-
+    decide(tasks);
     log.log(`Done (in ${Math.floor(process.uptime())}s.)`);
 
     return { };

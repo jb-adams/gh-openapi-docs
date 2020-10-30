@@ -1,3 +1,4 @@
+import defaults from './defaults';
 import { merge } from 'lodash';
 import path from 'path';
 import envConfig from './environment'
@@ -16,7 +17,8 @@ const localConfig = {
   redocTheme: userConfig.redocTheme || 'default',
   defaultBranch: userConfig.defaultBranch || 'master',
   branchPathBase: userConfig.branchPath || 'preview',
-  contactUrl: userConfig.contactUrl || ''
+  contactUrl: userConfig.contactUrl || '',
+  enabledBranchPatterns: userConfig.enabledBranchPatterns || defaults.enabledBranchPatterns,
 };
 
 const constructBranchPath = (defaultBranch, currentBranch, root, branchPathBase) => {
